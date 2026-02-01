@@ -192,6 +192,21 @@ img {
   .mobile-toggle {
     display: block !important;
   }
+  
+  /* Fix Grid Cleanups for Mobile */
+  .container {
+      padding: 0 1.5rem;
+  }
+  
+  /* Optimization Game Mobile Layout */
+  .opt-game-container { 
+      grid-template-columns: 1fr !important;
+  }
+
+  /* Blog Grid Mobile */
+   #blog .card {
+       min-height: auto;
+   }
 }
 
 /* Glitch Effect */

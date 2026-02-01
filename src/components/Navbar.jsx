@@ -152,6 +152,57 @@ const Navbar = ({ onLogoClick, onBlueprintClick }) => {
                     </button>
                 </div>
             </div>
+
+            {/* Mobile Menu Drawer */}
+            {isOpen && (
+                <div className="mobile-menu fade-in" style={{
+                    position: 'absolute',
+                    top: 'var(--header-height)',
+                    left: 0,
+                    width: '100%',
+                    backgroundColor: isDark ? 'rgba(15, 23, 42, 0.98)' : 'rgba(255, 255, 255, 0.98)',
+                    borderBottom: '1px solid var(--border-color)',
+                    padding: '2rem',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '1.5rem',
+                    boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
+                    zIndex: 999
+                }}>
+                    <ul style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center' }}>
+                        {navLinks.map((link) => (
+                            <li key={link.name}>
+                                <a href={link.href} 
+                                   onClick={() => setIsOpen(false)}
+                                   style={{
+                                    color: 'var(--text-primary)',
+                                    fontWeight: 600,
+                                    fontSize: '1.2rem'
+                                }}>
+                                    {link.name}
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                    
+                    <div style={{ display: 'flex', justifyContent: 'center', gap: '2rem', marginTop: '1rem', borderTop: '1px solid var(--border-color)', paddingTop: '1.5rem' }}>
+                        {/* Theme Toggle Mobile */}
+                        <button onClick={toggleTheme} style={{ background: 'none', border: 'none', color: 'var(--text-primary)' }}>
+                             {isDark ? <Sun size={24} /> : <Moon size={24} />}
+                        </button>
+
+                        {/* Blueprint Toggle Mobile */}
+                        <button onClick={onBlueprintClick} style={{ background: 'none', border: 'none', color: 'var(--text-primary)' }}>
+                             <Ruler size={24} />
+                        </button>
+
+                         {/* Language Toggle Mobile */}
+                         <button onClick={toggleLanguage} style={{ background: 'none', border: 'none', color: 'var(--text-primary)', fontWeight: 'bold' }}>
+                            <Globe size={24} />
+                        </button>
+                    </div>
+                </div>
+            )}
         </nav>
     );
 };

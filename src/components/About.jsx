@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import FallingText from './FallingText';
 
 const About = () => {
     const { t } = useLanguage();
+    const [isGravityActive, setIsGravityActive] = useState(false);
 
     return (
         <section id="about" className="section" style={{ backgroundColor: 'var(--bg-secondary)' }}>
@@ -39,17 +41,42 @@ const About = () => {
                     </div>
 
                     <div>
-                        <h3 style={{ fontSize: '2rem', marginBottom: '1rem', color: 'var(--text-primary)' }}>
+                        <h3
+                            className="section-title"
+                            style={{
+                                fontSize: '2rem',
+                                marginBottom: '1rem',
+                                color: 'var(--text-primary)',
+                                textAlign: 'left',
+                                cursor: 'pointer',
+                                userSelect: 'none'
+                            }}
+                            onClick={() => setIsGravityActive(true)}
+                            title="??? : Activate Gravity Protocol"
+                        >
                             {t.about.heading}
+                            <span style={{ fontSize: '1rem', marginLeft: '10px', opacity: 0.3 }}>▼</span>
                         </h3>
 
-                        <p style={{ marginBottom: '1.5rem', color: 'var(--text-secondary)', fontSize: '1.1rem' }}>
-                            {t.about.text1}
-                        </p>
+                        <div style={{ position: 'relative', minHeight: '300px' }}>
+                            {isGravityActive ? (
+                                <FallingText
+                                    text={`${t.about.text1} ${t.about.text2}`}
+                                    duration={8000} // 8 seconds of chaos
+                                    onFinished={() => setIsGravityActive(false)}
+                                />
+                            ) : (
+                                <>
+                                    <p style={{ marginBottom: '1.5rem', color: 'var(--text-secondary)', fontSize: '1.1rem' }}>
+                                        {t.about.text1}
+                                    </p>
 
-                        <p style={{ marginBottom: '2rem', color: 'var(--text-secondary)', fontSize: '1.1rem' }}>
-                            {t.about.text2}
-                        </p>
+                                    <p style={{ marginBottom: '2rem', color: 'var(--text-secondary)', fontSize: '1.1rem' }}>
+                                        {t.about.text2}
+                                    </p>
+                                </>
+                            )}
+                        </div>
 
                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                             <div style={statCardStyle}>
