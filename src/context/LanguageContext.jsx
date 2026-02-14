@@ -12,68 +12,68 @@ const translations = {
         },
         hero: {
             role: "Mechatronics Engineer",
-            title: "Optimizing Business",
-            subtitle: "Through Engineering",
-            description: "I develop high-impact technical solutions to maximize efficiency and profitability. Bridging the gap between mechanical systems, electronics, and software.",
-            ctaWork: "View My Work",
+            title: "Innovating with",
+            subtitle: "Mint Mango",
+            description: "Founder of Mint Mango. I combine Mechatronics Engineering with specific software solutions to solve real-world logistical and operational problems for businesses.",
+            ctaWork: "View Projects",
             ctaTalk: "Let's Talk",
             ctaCV: "Download CV"
         },
         about: {
             title: "About Me",
-            heading: "More than just code. I build solutions.",
-            text1: "As a Mechatronics Engineer, I don't just see software or hardware in isolation. I see systems. My passion lies in identifying inefficiencies and engineering robust automation solutions that driving real business value.",
-            text2: "Whether it's optimizing a production line algorithm, developing a custom IoT dashboard, or automating administrative workflow, my goal is always the same: Maximize Profitability through Optimization.",
-            statExp: "Years Exp",
+            heading: "Engineering Solutions, Not Just Code.",
+            text1: "I am Jaime Crow, a Mechatronics Engineer and the founder of Mint Mango. My journey is defined by a hands-on approach to solving problems. Currently gaining international perspective in Australia's hospitality sector, I've seen firsthand how operational inefficiencies cost money.",
+            text2: "I created Mint Mango to bridge that gap. Whether it's a hotel management SaaS or a pharmacy inventory system, I build tools that organize employees, streamline logistics, and maximize profitability.",
+            statExp: "Ventures",
             statProj: "Projects"
         },
         experience: {
-            title: "Career Map",
+            title: "Career Path",
             jobs: [
                 {
-                    title: "Senior Mechatronics Engineer",
-                    company: "TechAutomate Solutions",
-                    date: "2023 - Present",
-                    description: "Leading a team of 5 in designing custom automated assembly lines. Improved client throughput by an average of 35%."
+                    title: "Founder & Lead Engineer",
+                    company: "Mint Mango",
+                    date: "2024 - Present",
+                    description: "Established a software development venture to provide tailored SaaS solutions. Successfully deployed applications for inventory management and logistical organization."
                 },
                 {
-                    title: "Automation Specialist",
-                    company: "Industrial Systems Inc.",
-                    date: "2021 - 2023",
-                    description: "Programmed PLC logic for packaging machinery and implemented SCADA systems for real-time monitoring."
+                    title: "In-Field Operations (Hospitality)",
+                    company: "Australia",
+                    date: "2024 - Present",
+                    description: "Working in a high-volume hotel environment to identify logistical bottlenecks. This direct experience inspired the development of the Hotel Logistics SaaS."
                 },
                 {
                     title: "B.S. Mechatronics Engineering",
-                    company: "Technical University",
-                    date: "2017 - 2021",
-                    description: "Graduated with Honors. Capstone project: Autonomous warehouse sorting robot using computer vision."
+                    company: "University",
+                    date: "Graduated",
+                    description: "Specialized in automation and systems engineering. Applied engineering principles to software architecture and business logic."
                 }
             ]
         },
         skills: {
             title: "Technical Expertise",
             categories: {
-                frontend: "Frontend Development",
-                backend: "Backend & Systems",
-                mechatronics: "Mechatronics & IoT",
-                data: "Data & Optimization"
+                frontend: "Frontend & UI",
+                backend: "Backend & Database",
+                mechatronics: "Engineering Logic",
+                data: "Tools & Platforms"
             }
         },
         demo: {
-            title: "See The Impact",
-            subtitle: "Adjust the automation level to see how engineering improvements directly translate to business results.",
+            title: "Optimization Demo",
+            subtitle: "See how optimizing process variables improves the final output.",
             params: "System Parameters",
             automation: "Automation Level",
-            automationDesc: "Increasing automation reduces manual error and speeds up throughput.",
-            note: "Engineer's Note:",
-            noteText: "\"Every standard deviation reduced in process variability correlates directly to bottom-line growth. My job is to move these sliders for you using code and hardware.\"",
-            efficiency: "Operational Efficiency",
-            revenue: "Projected Revenue",
+            automationDesc: "Higher automation reduces manual error rates.",
+            note: "Founder's Note:",
+            noteText: "\"My goal is to take these variables in your business—time, inventory, staff allocation—and optimize them using software.\"",
+            efficiency: "Efficiency",
+            revenue: "Projected Growth",
             roi: "ROI"
         },
         projects: {
-            title: "Case Studies",
-            subtitle: "Real-world problems solved through engineering and optimization.",
+            title: "Featured Projects",
+            subtitle: "Real solutions built for real operational needs.",
             filters: {
                 all: "All",
                 iot: "IoT",
@@ -82,43 +82,55 @@ const translations = {
                 data: "Data"
             },
             labels: {
-                problem: "Problem:",
-                solution: "Solution:",
-                impact: "Impact:",
+                problem: "The Challenge:",
+                solution: "The Solution:",
+                impact: "Key Impact:",
                 code: "Code",
                 demo: "Demo"
             },
             list: [
                 {
-                    title: "Automated Inventory System",
-                    problem: "Manual stock tracking led to 15% discrepancies and lost revenue.",
-                    solution: "Implemented IoT weight sensors linked to a React dashboard.",
-                    impact: "Reduced errors by 40% and improved turnover speed by 25%."
+                    title: "Hotel Logistics SaaS",
+                    problem: "Inefficient room cleaning assignments and lack of real-time status tracking in a busy hotel.",
+                    solution: "A complete SaaS platform for assigning rooms, tracking cleaner progress, and managing shift logistics.",
+                    impact: "Streamlines daily operations and improves staff accountability."
                 },
                 {
-                    title: "Production Line Monitor",
-                    problem: "Unpredicted equipment failure caused 4 hours of downtime/week.",
-                    solution: "Developed vibration analysis system using ESP32 & WebSockets.",
-                    impact: "Predicted maintenance allowed 0% unplanned downtime in Q1."
+                    title: "Pharmacy Management Dashboard",
+                    problem: "A local pharmacy struggled with manual inventory tracking and profit calculation per product.",
+                    solution: "An inventory and financial management system that tracks stock levels, expenses, and calculates profit margins.",
+                    impact: "Provides clear financial visibility and prevents stock discrepencies."
                 },
                 {
-                    title: "Energy Efficiency Bot",
-                    problem: "HVAC systems ran constantly, wasting energy in empty zones.",
-                    solution: "Created ML algorithm adjusting to occupancy & weather.",
-                    impact: "Saved client an estimated 15% in annual energy costs."
+                    title: "La Serena Bakery",
+                    problem: "A local bakery needed a way to showcase their brand and communicate effective sponsorship opportunities.",
+                    solution: "A modern, responsive landing page designed to attract partners and engage customers.",
+                    impact: "Enhances digital presence and brand professionalism."
                 },
                 {
-                    title: "Smart Agriculture Controller",
-                    problem: "Inconsistent irrigation wasted water and reduced crop yield.",
-                    solution: "Automated valve control system based on soil moisture sensors.",
-                    impact: "Reduced water usage by 30% while increasing yield by 10%."
+                    title: "Estruccom Engineering",
+                    problem: "A structural design firm needed a portfolio to demonstrate their technical capabilities and project status.",
+                    solution: "A project showcase platform detailing engineering projects, progress, and client benefits.",
+                    impact: "Increases client trust and conversion for high-value contracts."
+                },
+                {
+                    title: "AI Cattle Virtual Fence",
+                    problem: "Ranchers face high costs and labor in maintaining physical fences and monitoring herd safety.",
+                    solution: "An AI-powered system using computer vision and GPS to create virtual boundaries and monitor cattle 24/7.",
+                    impact: "Reduces material costs, allows flexible grazing management, and ensures herd security."
+                },
+                {
+                    title: "Corecare Telemedicine",
+                    problem: "Healthcare professionals need a unified platform for remote patient monitoring, communication, and treatment planning.",
+                    solution: "A comprehensive telemedicine platform with video conferencing, chat, versioned treatment plans, and progress tracking.",
+                    impact: "Improves patient adherence, streamlines clinical workflow, and enables continuous care."
                 }
             ]
         },
         contact: {
             title: "Get In Touch",
-            heading: "Let's Build Something Great",
-            text: "I'm currently open to new opportunities, freelance projects, or consulting work. If you have an efficiency problem that needs engineering, let's talk.",
+            heading: "Ready to Optimize?",
+            text: "I'm open to freelance projects or discuss how Mint Mango can help your business. Let's connect.",
             email: "Email",
             phone: "Phone",
             formName: "Name",
@@ -127,12 +139,12 @@ const translations = {
             send: "Send Message"
         },
         footer: {
-            rights: "Mechatronics Engineer. All rights reserved."
+            rights: "Founder of Mint Mango. All rights reserved."
         },
         liveDashboard: {
-            title: "Live Server Status",
-            nodes: "Active Nodes",
-            temp: "Server Temp",
+            title: "System Status",
+            nodes: "Active Projects",
+            temp: "Optimization",
             uptime: "Uptime"
         }
     },
@@ -146,68 +158,68 @@ const translations = {
         },
         hero: {
             role: "Ingeniero Mecatrónico",
-            title: "Optimizando Negocios",
-            subtitle: "A Través de la Ingeniería",
-            description: "Desarrollo soluciones técnicas de alto impacto para maximizar la eficiencia y la rentabilidad. Uniendo sistemas mecánicos, electrónica y software.",
+            title: "Innovando con",
+            subtitle: "Mint Mango",
+            description: "Fundador de Mint Mango. Combino la Ingeniería Mecatrónica con soluciones de software específicas para resolver problemas logísticos y operativos reales.",
             ctaWork: "Ver Proyectos",
             ctaTalk: "Hablemos",
             ctaCV: "Descargar CV"
         },
         about: {
             title: "Sobre Mí",
-            heading: "Más que código. Construyo soluciones.",
-            text1: "Como Ingeniero Mecatrónico, no veo software o hardware de forma aislada. Veo sistemas. Mi pasión es identificar ineficiencias y diseñar soluciones de automatización robustas que generen valor real al negocio.",
-            text2: "Ya sea optimizando un algoritmo de línea de producción, desarrollando un dashboard IoT a medida o automatizando flujos administrativos, mi objetivo es siempre el mismo: Maximizar la Rentabilidad a través de la Optimización.",
-            statExp: "Años Exp",
+            heading: "Ingeniería de Soluciones, no solo código.",
+            text1: "Soy Jaime Crow, Ingeniero Mecatrónico y fundador de Mint Mango. Mi enfoque es práctico: resolver problemas. Actualmente, desde Australia, observo de primera mano cómo las ineficiencias logísticas cuestan dinero en el sector hotelero.",
+            text2: "Creé Mint Mango para cerrar esa brecha. Ya sea un SaaS de gestión hotelera o un sistema de inventario para farmacias, construyo herramientas que organizan empleados, agilizan la logística y maximizan la rentabilidad.",
+            statExp: "Emprendimiento",
             statProj: "Proyectos"
         },
         experience: {
             title: "Trayectoria",
             jobs: [
                 {
-                    title: "Ingeniero Mecatrónico Senior",
-                    company: "TechAutomate Solutions",
-                    date: "2023 - Presente",
-                    description: "Liderando un equipo de 5 personas en el diseño de líneas de montaje automatizadas. Mejoré el rendimiento del cliente en un promedio del 35%."
+                    title: "Fundador e Ingeniero Principal",
+                    company: "Mint Mango",
+                    date: "2024 - Presente",
+                    description: "Establecí una empresa de desarrollo para ofrecer soluciones SaaS a medida. Desplegué aplicaciones exitosas para gestión de inventarios y organización logística."
                 },
                 {
-                    title: "Especialista en Automatización",
-                    company: "Industrial Systems Inc.",
-                    date: "2021 - 2023",
-                    description: "Programación de lógica PLC para maquinaria de envasado e implementación de sistemas SCADA para monitoreo en tiempo real."
+                    title: "Operaciones en Campo (Hospitalidad)",
+                    company: "Australia",
+                    date: "2024 - Presente",
+                    description: "Trabajando en un entorno hotelero de alto volumen para identificar cuellos de botella. Esta experiencia directa inspiró el desarrollo del SaaS de Logística Hotelera."
                 },
                 {
                     title: "Ingeniería Mecatrónica",
-                    company: "Universidad Técnica",
-                    date: "2017 - 2021",
-                    description: "Graduado con Honores. Proyecto final: Robot de clasificación de almacén autónomo usando visión artificial."
+                    company: "Universidad",
+                    date: "Graduado",
+                    description: "Especialización en automatización y sistemas. Apliqué principios de ingeniería a la arquitectura de software y lógica de negocios."
                 }
             ]
         },
         skills: {
             title: "Experiencia Técnica",
             categories: {
-                frontend: "Desarrollo Frontend",
-                backend: "Backend y Sistemas",
-                mechatronics: "Mecatrónica e IoT",
-                data: "Datos y Optimización"
+                frontend: "Frontend y UI",
+                backend: "Backend y Datos",
+                mechatronics: "Lógica de Ingeniería",
+                data: "Herramientas"
             }
         },
         demo: {
-            title: "Mira El Impacto",
-            subtitle: "Ajusta el nivel de automatización para ver cómo las mejoras de ingeniería se traducen directamente en resultados comerciales.",
-            params: "Parámetros del Sistema",
+            title: "Demo de Optimización",
+            subtitle: "Mira cómo la optimización de variables mejora el resultado final.",
+            params: "Parámetros",
             automation: "Nivel de Automatización",
-            automationDesc: "Aumentar la automatización reduce el error manual y acelera el rendimiento.",
-            note: "Nota del Ingeniero:",
-            noteText: "\"Cada desviación estándar reducida en la variabilidad del proceso se correlaciona directamente con el crecimiento de las ganancias. Mi trabajo es mover estos controles usando código y hardware.\"",
-            efficiency: "Eficiencia Operativa",
-            revenue: "Ingresos Proyectados",
+            automationDesc: "Mayor automatización reduce errores manuales.",
+            note: "Nota del Fundador:",
+            noteText: "\"Mi objetivo es tomar estas variables en tu negocio—tiempo, inventario, personal—y optimizarlas usando software.\"",
+            efficiency: "Eficiencia",
+            revenue: "Crecimiento",
             roi: "ROI"
         },
         projects: {
-            title: "Casos de Estudio",
-            subtitle: "Problemas del mundo real resueltos a través de ingeniería y optimización.",
+            title: "Proyectos Destacados",
+            subtitle: "Soluciones reales para necesidades operativas reales.",
             filters: {
                 all: "Todos",
                 iot: "IoT",
@@ -216,43 +228,55 @@ const translations = {
                 data: "Datos"
             },
             labels: {
-                problem: "Problema:",
-                solution: "Solución:",
-                impact: "Impacto:",
+                problem: "El Desafío:",
+                solution: "La Solución:",
+                impact: "Impacto Clave:",
                 code: "Código",
                 demo: "Demo"
             },
             list: [
                 {
-                    title: "Sistema de Inventario Automatizado",
-                    problem: "El seguimiento manual causaba discrepancias del 15% y pérdida de ingresos.",
-                    solution: "Sensores de peso IoT implementados vinculados a un dashboard React.",
-                    impact: "Reducción de errores del 40% y mejora de velocidad del 25%."
+                    title: "SaaS Logística Hotelera",
+                    problem: "Asignación ineficiente de limpieza de habitaciones y falta de seguimiento en tiempo real.",
+                    solution: "Plataforma SaaS completa para asignar habitaciones, rastrear progreso y gestionar logística.",
+                    impact: "Agiliza las operaciones diarias y mejora la responsabilidad del personal."
                 },
                 {
-                    title: "Monitor de Línea de Producción",
-                    problem: "Fallas imprevistas de equipos causaban 4 horas de inactividad/semana.",
-                    solution: "Sistema de análisis de vibraciones con ESP32 y WebSockets.",
-                    impact: "El mantenimiento predictivo permitió 0% de inactividad no planificada."
+                    title: "Dashboard Gestión de Farmacia",
+                    problem: "Farmacia local con dificultades en seguimiento manual de inventario y cálculo de ganancias.",
+                    solution: "Sistema de gestión financiera y de inventario que rastrea stock, gastos y márgenes.",
+                    impact: "Proporciona visibilidad financiera clara y evita discrepancias de stock."
                 },
                 {
-                    title: "Bot de Eficiencia Energética",
-                    problem: "Los sistemas HVAC funcionaban constantemente, desperdiciando energía.",
-                    solution: "Algoritmo de ML creado que se ajusta a la ocupación y el clima.",
-                    impact: "Ahorro estimado del 15% en costos de energía anuales para el cliente."
+                    title: "La Serena Pastelería",
+                    problem: "Necesidad de mostrar la marca y comunicar oportunidades de patrocinio eficazmente.",
+                    solution: "Landing page moderna y responsiva diseñada para atraer socios y clientes.",
+                    impact: "Mejora la presencia digital y la profesionalidad de la marca."
                 },
                 {
-                    title: "Controlador de Agricultura Inteligente",
-                    problem: "El riego inconsistente desperdiciaba agua y reducía el rendimiento.",
-                    solution: "Sistema de control de válvulas automatizado basado en sensores de humedad.",
-                    impact: "Reducción del uso de agua del 30% y aumento del rendimiento del 10%."
+                    title: "Estruccom Ingeniería",
+                    problem: "Firma de diseño estructural necesitaba portafolio para mostrar capacidad técnica.",
+                    solution: "Plataforma de escaparate de proyectos detallando progreso y beneficios.",
+                    impact: "Aumenta la confianza del cliente y la conversión de contratos."
+                },
+                {
+                    title: "Cerca Virtual Ganadera con IA",
+                    problem: "Los ganaderos enfrentan altos costos y trabajo en mantener cercas físicas y monitorear al ganado.",
+                    solution: "Sistema impulsado por IA usando visión artificial y GPS para crear límites virtuales y monitorear 24/7.",
+                    impact: "Ahorra en materiales, permite pastoreo flexible y asegura la seguridad del rebaño."
+                },
+                {
+                    title: "Corecare Telemedicina",
+                    problem: "Los profesionales de salud necesitan una plataforma unificada para monitoreo remoto, comunicación y planes de tratamiento.",
+                    solution: "Plataforma integral de telemedicina con videoconferencia, chat, planes de tratamiento versionados y seguimiento de progreso.",
+                    impact: "Mejora la adherencia del paciente, optimiza el flujo clínico y permite una atención continua."
                 }
             ]
         },
         contact: {
             title: "Contáctame",
-            heading: "Construyamos Algo Genial",
-            text: "Actualmente estoy abierto a nuevas oportunidades, proyectos freelance o consultoría. Si tienes un problema de eficiencia que necesita ingeniería, hablemos.",
+            heading: "¿Listo para Optimizar?",
+            text: "Estoy abierto a proyectos freelance o discutir cómo Mint Mango puede ayudar a tu negocio.",
             email: "Correo",
             phone: "Teléfono",
             formName: "Nombre",
@@ -261,12 +285,12 @@ const translations = {
             send: "Enviar Mensaje"
         },
         footer: {
-            rights: "Ingeniero Mecatrónico. Todos los derechos reservados."
+            rights: "Fundador de Mint Mango. Todos los derechos reservados."
         },
         liveDashboard: {
-            title: "Estado del Servidor",
-            nodes: "Nodos Activos",
-            temp: "Temp. Servidor",
+            title: "Estado del Sistema",
+            nodes: "Proyectos Activos",
+            temp: "Optimización",
             uptime: "Tiempo Activo"
         }
     }

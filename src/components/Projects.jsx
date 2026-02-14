@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import { ExternalLink, Github, Filter, ArrowRight, X } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
-import inventoryImg from '../assets/inventory.jpg';
-import productionImg from '../assets/production.jpg';
-import energyImg from '../assets/energy.jpg';
-import farmImg from '../assets/farm.jpg';
+import hotelImg from '../assets/hotel_saas.png';
+import pharmacyImg from '../assets/pharmacy_dashboard.png';
+import bakeryImg from '../assets/bakery_landing.png';
+import cattleImg from '../assets/cattle_fence.png';
+import estruccomImg from '../assets/estruccom.png';
+import corecareImg from '../assets/corecare.png';
+
 
 const Projects = () => {
     const { t } = useLanguage();
@@ -23,41 +26,57 @@ const Projects = () => {
     const projectsData = [
         {
             id: 1,
-            category: "IoT",
-            image: inventoryImg,
-            tech: ["Python", "IoT Sensors", "SQL", "React"],
+            category: "Software", // Hotel App
+            image: hotelImg,
+            tech: ["React Native", "Expo", "Supabase", "TypeScript"],
             link: "#",
-            github: "#"
+            github: "https://github.com/JotaC95/HotelProject"
         },
         {
             id: 2,
-            category: "Automation",
-            image: productionImg,
-            tech: ["C++", "ESP32", "WebSockets", "Data Viz"],
+            category: "Data", // Pharmacy
+            image: pharmacyImg,
+            tech: ["React", "Node.js", "SQL", "Dashboard"],
             link: "#",
-            github: "#"
+            github: "https://github.com/JotaC95/FarmaciaJose"
         },
         {
             id: 3,
-            category: "Software",
-            image: energyImg,
-            tech: ["Machine Learning", "Python", "Cloud API", "Node.js"],
+            category: "Software", // Bakery
+            image: bakeryImg,
+            tech: ["React", "Tailwind", "UX/UI"],
             link: "#",
-            github: "#"
+            github: "https://github.com/JotaC95/LaSerenaPage"
         },
         {
             id: 4,
-            category: "IoT",
-            image: farmImg,
-            tech: ["Arduino", "LoRaWAN", "C++", "InfluxDB"],
+            category: "Automation", // Structural Design
+            image: estruccomImg,
+            tech: ["React", "Portfolio", "Design"],
             link: "#",
-            github: "#"
+            github: "https://github.com/JotaC95/estruccom-web"
+        },
+        {
+            id: 5,
+            category: "IoT", // Cattle Fence
+            image: cattleImg,
+            tech: ["AI", "Python", "Computer Vision", "GPS"],
+            link: "#",
+            github: "https://github.com/JotaC95/cattle_virtual_fence"
+        },
+        {
+            id: 6,
+            category: "HealthTech", // Corecare
+            image: corecareImg,
+            tech: ["React", "WebRTC", "Node.js", "HealthTech"],
+            link: "#",
+            github: "https://github.com/JotaC95/Corecare"
         }
     ];
 
     const projects = projectsData.map((p, i) => ({
         ...p,
-        ...t.projects.list[i]
+        ...t.projects.list[i] // This will need to match the order in LanguageContext
     }));
 
     const filteredProjects = filter === 'all'

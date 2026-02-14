@@ -8,7 +8,7 @@ const Contact = () => {
     const [status, setStatus] = useState('');
     const [copied, setCopied] = useState(false);
 
-    const emailAddress = "hello@example.com";
+    const emailAddress = "jota.crow@gmail.com";
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -88,15 +88,7 @@ const Contact = () => {
                                 </div>
                             </div>
 
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                                <div style={{ padding: '1rem', backgroundColor: 'var(--bg-card)', borderRadius: '12px', color: 'var(--accent-secondary)' }}>
-                                    <Phone size={24} />
-                                </div>
-                                <div>
-                                    <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>{t.contact.phone}</p>
-                                    <a href="tel:+1234567890" style={{ fontSize: '1.1rem', fontWeight: 500, color: 'var(--text-primary)' }}>+1 234 567 890</a>
-                                </div>
-                            </div>
+                            {/* Phone Removed */}
                         </div>
                     </div>
 

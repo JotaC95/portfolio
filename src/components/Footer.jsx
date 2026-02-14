@@ -20,7 +20,7 @@ const Footer = ({ onAdminClick, onHover }) => {
             }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                     <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
-                        &copy; {currentYear} Percival. {t.footer.rights}
+                        &copy; {currentYear} Jaime Crow. {t.footer.rights}
                     </span>
                 </div>
 
@@ -36,9 +36,9 @@ const Footer = ({ onAdminClick, onHover }) => {
                     >
                         Admin Access
                     </span>
-                    <a href="#" className="social-link" onMouseEnter={onHover}>LinkedIn</a>
-                    <a href="#" className="social-link" onMouseEnter={onHover}>GitHub</a>
-                    <a href="#" className="social-link" onMouseEnter={onHover}>Twitter</a>
+                    <a href="https://www.linkedin.com/in/jaimejosecrow" target="_blank" rel="noopener noreferrer" className="social-link" onMouseEnter={onHover}>LinkedIn</a>
+                    <a href="https://github.com/JotaC95" target="_blank" rel="noopener noreferrer" className="social-link" onMouseEnter={onHover}>GitHub</a>
+                    <a href="mailto:jota.crow@gmail.com" className="social-link" onMouseEnter={onHover}>Email</a>
                 </div>
             </div>
         </footer>

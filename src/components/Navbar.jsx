@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Cpu, Globe, Sun, Moon, Ruler } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import logo from '../assets/mintmango.png';
 
 const Navbar = ({ onLogoClick, onBlueprintClick }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -52,15 +53,12 @@ const Navbar = ({ onLogoClick, onBlueprintClick }) => {
                             display: 'flex',
                             alignItems: 'center',
                             gap: '0.5rem',
-                            fontSize: '1.5rem',
-                            fontWeight: 'bold',
-                            color: 'var(--text-primary)',
                             cursor: 'pointer',
                             userSelect: 'none',
                             transition: 'all 0.3s ease'
                         }}>
-                        <Cpu color="var(--accent-primary)" size={32} />
-                        <span>Percival<span style={{ color: 'var(--accent-primary)' }}>.</span></span>
+                        {/* Integrated Logo Image */}
+                        <img src={logo} alt="Mint Mango" style={{ height: '40px', objectFit: 'contain' }} />
                     </div>
                     <span className="tooltip-text">¿Quieres ver el mundo como yo lo veo?</span>
                 </div>
@@ -102,10 +100,6 @@ const Navbar = ({ onLogoClick, onBlueprintClick }) => {
                     </button>
 
                     {/* Blueprint Toggle */}
-                    <button
-                        onClick={onLogoClick ? () => { /* no-op for logo click prop re-use confusion logic check */ } : null}
-                        style={{ display: 'none' }} // Safety check
-                    />
                     <button
                         onClick={onBlueprintClick}
                         title="Blueprint Mode"
@@ -172,32 +166,32 @@ const Navbar = ({ onLogoClick, onBlueprintClick }) => {
                     <ul style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center' }}>
                         {navLinks.map((link) => (
                             <li key={link.name}>
-                                <a href={link.href} 
-                                   onClick={() => setIsOpen(false)}
-                                   style={{
-                                    color: 'var(--text-primary)',
-                                    fontWeight: 600,
-                                    fontSize: '1.2rem'
-                                }}>
+                                <a href={link.href}
+                                    onClick={() => setIsOpen(false)}
+                                    style={{
+                                        color: 'var(--text-primary)',
+                                        fontWeight: 600,
+                                        fontSize: '1.2rem'
+                                    }}>
                                     {link.name}
                                 </a>
                             </li>
                         ))}
                     </ul>
-                    
+
                     <div style={{ display: 'flex', justifyContent: 'center', gap: '2rem', marginTop: '1rem', borderTop: '1px solid var(--border-color)', paddingTop: '1.5rem' }}>
                         {/* Theme Toggle Mobile */}
                         <button onClick={toggleTheme} style={{ background: 'none', border: 'none', color: 'var(--text-primary)' }}>
-                             {isDark ? <Sun size={24} /> : <Moon size={24} />}
+                            {isDark ? <Sun size={24} /> : <Moon size={24} />}
                         </button>
 
                         {/* Blueprint Toggle Mobile */}
                         <button onClick={onBlueprintClick} style={{ background: 'none', border: 'none', color: 'var(--text-primary)' }}>
-                             <Ruler size={24} />
+                            <Ruler size={24} />
                         </button>
 
-                         {/* Language Toggle Mobile */}
-                         <button onClick={toggleLanguage} style={{ background: 'none', border: 'none', color: 'var(--text-primary)', fontWeight: 'bold' }}>
+                        {/* Language Toggle Mobile */}
+                        <button onClick={toggleLanguage} style={{ background: 'none', border: 'none', color: 'var(--text-primary)', fontWeight: 'bold' }}>
                             <Globe size={24} />
                         </button>
                     </div>

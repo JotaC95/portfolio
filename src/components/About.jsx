@@ -80,11 +80,11 @@ const About = () => {
 
                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                             <div style={statCardStyle}>
-                                <span style={statNumberStyle}>4+</span>
+                                <span style={statNumberStyle}>1+</span>
                                 <span style={statLabelStyle}>{t.about.statExp}</span>
                             </div>
                             <div style={statCardStyle}>
-                                <span style={statNumberStyle}>20+</span>
+                                <span style={statNumberStyle}>4+</span>
                                 <span style={statLabelStyle}>{t.about.statProj}</span>
                             </div>
                         </div>
