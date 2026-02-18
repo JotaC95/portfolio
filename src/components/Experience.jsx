@@ -1,9 +1,22 @@
 import React from 'react';
-import { Briefcase, GraduationCap, Calendar } from 'lucide-react';
+import { Briefcase, GraduationCap, Calendar, Rocket, Cpu } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 const Experience = () => {
     const { t } = useLanguage();
+
+    const getIcon = (type) => {
+        switch (type) {
+            case 'education':
+                return <GraduationCap size={20} />;
+            case 'entrepreneurship':
+                return <Rocket size={20} />;
+            case 'project':
+                return <Cpu size={20} />;
+            default:
+                return <Briefcase size={20} />;
+        }
+    };
 
     return (
         <section id="experience" className="section">
@@ -30,7 +43,7 @@ const Experience = () => {
                             position: 'relative',
                             zIndex: 1
                         }}>
-                            {/* Icon Bubble (Logic assumes last item is education, or we check title/content - keeping simple for now) */}
+                            {/* Icon Bubble */}
                             <div style={{
                                 flexShrink: 0,
                                 width: '42px',
@@ -41,10 +54,10 @@ const Experience = () => {
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                color: 'var(--accent-primary)'
+                                color: 'var(--accent-primary)',
+                                boxShadow: '0 0 10px rgba(6, 182, 212, 0.2)'
                             }}>
-                                {/* For simplicity in this generic map, we'll use Briefcase unless it's the last one which is usually education in this specific data set, or we could add a 'type' field to the translation object, but let's stick to Briefcase for work and Cap for uni based on index for now to avoid breaking the translation object structure if not needed */}
-                                {index === t.experience.jobs.length - 1 ? <GraduationCap size={20} /> : <Briefcase size={20} />}
+                                {getIcon(item.type)}
                             </div>
 
                             {/* Content Card */}
@@ -54,10 +67,22 @@ const Experience = () => {
                                 padding: '1.5rem',
                                 borderRadius: '12px',
                                 border: '1px solid var(--border-color)',
-                                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
-                            }}>
+                                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                                transition: 'transform 0.2s ease, box-shadow 0.2s ease'
+                            }}
+                                onMouseEnter={(e) => {
+                                    e.currentTarget.style.transform = 'translateY(-2px)';
+                                    e.currentTarget.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1)';
+                                    e.currentTarget.style.borderColor = 'var(--accent-primary)';
+                                }}
+                                onMouseLeave={(e) => {
+                                    e.currentTarget.style.transform = 'translateY(0)';
+                                    e.currentTarget.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)';
+                                    e.currentTarget.style.borderColor = 'var(--border-color)';
+                                }}
+                            >
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                                    <h3 style={{ fontSize: '1.25rem', color: 'var(--text-primary)' }}>{item.title}</h3>
+                                    <h3 style={{ fontSize: '1.25rem', color: 'var(--text-primary)', fontWeight: '600' }}>{item.title}</h3>
                                     <span style={{
                                         display: 'flex',
                                         alignItems: 'center',
@@ -66,17 +91,37 @@ const Experience = () => {
                                         color: 'var(--accent-primary)',
                                         backgroundColor: 'rgba(6, 182, 212, 0.1)',
                                         padding: '0.25rem 0.75rem',
-                                        borderRadius: '20px'
+                                        borderRadius: '20px',
+                                        whiteSpace: 'nowrap'
                                     }}>
                                         <Calendar size={14} /> {item.date}
                                     </span>
                                 </div>
 
-                                <h4 style={{ fontSize: '1rem', color: 'var(--text-accent)', marginBottom: '1rem' }}>{item.company}</h4>
+                                <h4 style={{ fontSize: '1rem', color: 'var(--text-accent)', marginBottom: '1rem', fontWeight: '500' }}>{item.company}</h4>
 
-                                <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.6' }}>
+                                <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.6', marginBottom: '1rem' }}>
                                     {item.description}
                                 </p>
+
+                                {/* Tags */}
+                                {item.tags && (
+                                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+                                        {item.tags.map((tag, i) => (
+                                            <span key={i} style={{
+                                                fontSize: '0.75rem',
+                                                padding: '0.2rem 0.6rem',
+                                                borderRadius: '12px',
+                                                backgroundColor: 'var(--bg-hover)',
+                                                color: 'var(--text-secondary)',
+                                                border: '1px solid var(--border-color)',
+                                                fontFamily: 'monospace'
+                                            }}>
+                                                {tag}
+                                            </span>
+                                        ))}
+                                    </div>
+                                )}
                             </div>
                         </div>
                     ))}

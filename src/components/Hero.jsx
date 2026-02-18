@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import { ArrowRight, ChevronDown, Download } from 'lucide-react';
+import { ArrowRight, ChevronDown, Download, Github, Linkedin, Mail } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import DecryptedText from './DecryptedText';
 
@@ -103,6 +103,26 @@ const Hero = () => {
                         {t.hero.ctaTalk}
                     </a>
                 </div>
+
+                {/* Social Icons for Hero */}
+                <div className="fade-in" style={{
+                    display: 'flex',
+                    gap: '2rem',
+                    justifyContent: 'center',
+                    marginTop: '2.5rem',
+                    animationDelay: '0.8s'
+                }}>
+                    <a href="https://github.com/JotaC95" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-secondary)', transition: 'color 0.3s' }} onMouseEnter={e => e.target.style.color = 'var(--text-primary)'} onMouseLeave={e => e.target.style.color = 'var(--text-secondary)'}>
+                        <Github size={24} />
+                    </a>
+                    <a href="https://www.linkedin.com/in/jaimejosecrow" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-secondary)', transition: 'color 0.3s' }} onMouseEnter={e => e.target.style.color = '#0077b5'} onMouseLeave={e => e.target.style.color = 'var(--text-secondary)'}>
+                        <Linkedin size={24} />
+                    </a>
+                    <a href="mailto:jota.crow@gmail.com" style={{ color: 'var(--text-secondary)', transition: 'color 0.3s' }} onMouseEnter={e => e.target.style.color = '#ea4335'} onMouseLeave={e => e.target.style.color = 'var(--text-secondary)'}>
+                        <Mail size={24} />
+                    </a>
+                </div>
+
             </div>
 
             <div style={{

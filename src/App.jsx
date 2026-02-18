@@ -15,6 +15,7 @@ import LiveDashboard from './components/LiveDashboard';
 import MatrixRain from './components/MatrixRain';
 import Terminal from './components/Terminal';
 import GodModeHUD from './components/GodModeHUD'; // New Import
+import SocialSidebar from './components/SocialSidebar'; // New Import
 import { LanguageProvider } from './context/LanguageContext';
 import useSound from './hooks/useSound';
 
@@ -178,6 +179,7 @@ function App() {
           onHover={() => playSound('hover')}
         />
         <LiveDashboard />
+        <SocialSidebar />
       </div>
     </LanguageProvider>
   );

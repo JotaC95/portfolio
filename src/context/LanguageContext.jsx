@@ -31,22 +31,60 @@ const translations = {
             title: "Career Path",
             jobs: [
                 {
-                    title: "Founder & Lead Engineer",
-                    company: "Mint Mango",
-                    date: "2024 - Present",
-                    description: "Established a software development venture to provide tailored SaaS solutions. Successfully deployed applications for inventory management and logistical organization."
+                    title: "Adv. Diploma in IT (Telecommunications)",
+                    company: "Australia",
+                    type: "education",
+                    date: "2025 - Present",
+                    description: "Specializing in network infrastructure, wireless communication, and IoT connectivity protocols.",
+                    tags: ["Networking", "IoT", "Telecommunications"]
                 },
                 {
-                    title: "In-Field Operations (Hospitality)",
-                    company: "Australia",
+                    title: "Co-Founder & Lead Engineer",
+                    company: "Mint Mango",
+                    type: "entrepreneurship",
+                    date: "2025 - Present",
+                    description: "Identified logistical inefficiencies in hospitality. Co-founded a SaaS startup to automate hotel operations and staff management.",
+                    tags: ["React", "Supabase", "SaaS", "Business Logic"]
+                },
+                {
+                    title: "Logistics & Housekeeping",
+                    company: "Quest Hotels",
+                    type: "work",
+                    date: "2025 - Present",
+                    description: "Gained firsthand insight into operational bottlenecks. This direct experience inspired the architecture of Mint Mango's logic.",
+                    tags: ["Operations", "Logistics", "Process Optimization"]
+                },
+                {
+                    title: "Founder",
+                    company: "Virtual Cattle Fence",
+                    type: "entrepreneurship",
                     date: "2024 - Present",
-                    description: "Working in a high-volume hotel environment to identify logistical bottlenecks. This direct experience inspired the development of the Hotel Logistics SaaS."
+                    description: "Pivoted from hardware repair to creating a GPS-based virtual fencing system for livestock management.",
+                    tags: ["IoT", "Hardware", "GPS", "Embedded Systems"]
+                },
+                {
+                    title: "Full Stack Developer (Self-Taught)",
+                    company: "Self-Employed",
+                    type: "education",
+                    date: "2020 - 2023",
+                    description: "Leveraged COVID isolation to master modern web stacks. Shifted focus from mechanical systems to software architecture.",
+                    tags: ["JavaScript", "Python", "Web Development"]
+                },
+                {
+                    title: "Maintenance Engineer",
+                    company: "AEMSA",
+                    type: "work",
+                    date: "2023",
+                    description: "Brief tenure in industrial maintenance. Realized a passion for building new systems rather than maintaining old ones.",
+                    tags: ["Maintenance", "Industrial Engineering"]
                 },
                 {
                     title: "B.S. Mechatronics Engineering",
                     company: "University",
-                    date: "Graduated",
-                    description: "Specialized in automation and systems engineering. Applied engineering principles to software architecture and business logic."
+                    type: "education",
+                    date: "Graduated 2023",
+                    description: "Foundation in automation, control systems, and electronics. The bridge between hardware logic and software code.",
+                    tags: ["Mechatronics", "Automation", "Control Systems"]
                 }
             ]
         },
@@ -177,22 +215,60 @@ const translations = {
             title: "Trayectoria",
             jobs: [
                 {
-                    title: "Fundador e Ingeniero Principal",
-                    company: "Mint Mango",
-                    date: "2024 - Presente",
-                    description: "Establecí una empresa de desarrollo para ofrecer soluciones SaaS a medida. Desplegué aplicaciones exitosas para gestión de inventarios y organización logística."
-                },
-                {
-                    title: "Operaciones en Campo (Hospitalidad)",
+                    title: "Adv. Diploma en TI (Telecomunicaciones)",
                     company: "Australia",
-                    date: "2024 - Presente",
-                    description: "Trabajando en un entorno hotelero de alto volumen para identificar cuellos de botella. Esta experiencia directa inspiró el desarrollo del SaaS de Logística Hotelera."
+                    type: "education",
+                    date: "2025 - Presente",
+                    description: "Especialización en infraestructura de redes, comunicación inalámbrica y protocolos de conectividad IoT.",
+                    tags: ["Redes", "IoT", "Telecomunicaciones"]
                 },
                 {
-                    title: "Ingeniería Mecatrónica",
+                    title: "Cofundador e Ingeniero Principal",
+                    company: "Mint Mango",
+                    type: "entrepreneurship",
+                    date: "2025 - Presente",
+                    description: "Identifiqué ineficiencias logísticas en la hospitalidad. Cofundé una startup SaaS para automatizar operaciones hoteleras.",
+                    tags: ["React", "Supabase", "SaaS", "Lógica de Negocios"]
+                },
+                {
+                    title: "Logística y Housekeeping",
+                    company: "Quest Hotels",
+                    type: "work",
+                    date: "2025 - Presente",
+                    description: "Obtuve visión directa de los cuellos de botella operativos. Esta experiencia inspiró la arquitectura de Mint Mango.",
+                    tags: ["Operaciones", "Logística", "Optimización de Procesos"]
+                },
+                {
+                    title: "Fundador",
+                    company: "Cerca Virtual Ganadera",
+                    type: "entrepreneurship",
+                    date: "2024 - Presente",
+                    description: "Pivoteé de la reparación de hardware a crear un sistema de cercado virtual basado en GPS para ganado.",
+                    tags: ["IoT", "Hardware", "GPS", "Sistemas Embebidos"]
+                },
+                {
+                    title: "Desarrollador Full Stack (Autodidacta)",
+                    company: "Independiente",
+                    type: "education",
+                    date: "2020 - 2023",
+                    description: "Aproveché el aislamiento por COVID para dominar stacks web modernos. Cambié el enfoque de sistemas mecánicos a arquitectura de software.",
+                    tags: ["JavaScript", "Python", "Desarrollo Web"]
+                },
+                {
+                    title: "Ingeniero de Mantenimiento",
+                    company: "AEMSA",
+                    type: "work",
+                    date: "2023",
+                    description: "Breve periodo en mantenimiento industrial. Descubrí mi pasión por construir nuevos sistemas en lugar de mantener los antiguos.",
+                    tags: ["Mantenimiento", "Ingeniería Industrial"]
+                },
+                {
+                    title: "Ingeniero Mecatrónica",
                     company: "Universidad",
-                    date: "Graduado",
-                    description: "Especialización en automatización y sistemas. Apliqué principios de ingeniería a la arquitectura de software y lógica de negocios."
+                    type: "education",
+                    date: "Graduado 2023",
+                    description: "Fundamentos en automatización, sistemas de control y electrónica. El puente entre la lógica de hardware y el código de software.",
+                    tags: ["Mecatrónica", "Automatización", "Sistemas de Control"]
                 }
             ]
         },
