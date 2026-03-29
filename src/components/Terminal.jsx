@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { X, Terminal as TerminalIcon } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
-const Terminal = ({ onClose, onAdmin, onMatrix }) => {
+const Terminal = ({ onClose, onAdmin, onMatrix, godMode }) => {
     const [input, setInput] = useState('');
     const [history, setHistory] = useState([
         { type: 'output', content: 'Percival OS v1.0.0 [Secure Shell]' },
@@ -11,6 +11,8 @@ const Terminal = ({ onClose, onAdmin, onMatrix }) => {
     const inputRef = useRef(null);
     const messagesEndRef = useRef(null);
     const { t } = useLanguage();
+
+    const prompt = godMode ? 'god@percival:#' : 'visitor@percival:~$';
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -42,7 +44,9 @@ const Terminal = ({ onClose, onAdmin, onMatrix }) => {
   exit      - Close terminal`;
                 break;
             case 'whoami':
-                output = 'visitor@percival-portfolio:~$ authenticated as Guest User';
+                output = godMode
+                    ? 'god@percival-portfolio:# system superuser (ROOT)'
+                    : 'visitor@percival-portfolio:~$ authenticated as Guest User';
                 break;
             case 'skills':
                 output = `
@@ -70,7 +74,7 @@ const Terminal = ({ onClose, onAdmin, onMatrix }) => {
             case 'red_pill':
             case 'choice':
                 // Cinematic Sequence
-                setHistory(prev => [...prev, { type: 'command', content: `visitor@percival:~$ ${cmd}` }]);
+                setHistory(prev => [...prev, { type: 'command', content: `${prompt} ${cmd}` }]);
 
                 setTimeout(() => {
                     setHistory(prev => [...prev, { type: 'output', content: "The Matrix has you..." }]);
@@ -117,7 +121,7 @@ const Terminal = ({ onClose, onAdmin, onMatrix }) => {
 
         setHistory(prev => [
             ...prev,
-            { type: 'command', content: `visitor@percival:~$ ${cmd}` },
+            { type: 'command', content: `${prompt} ${cmd}` },
             { type: 'output', content: output }
         ]);
     };
@@ -147,10 +151,12 @@ const Terminal = ({ onClose, onAdmin, onMatrix }) => {
                 width: '600px',
                 maxWidth: '90%',
                 height: '400px',
-                backgroundColor: '#0f172a',
-                border: '1px solid #334155',
+                backgroundColor: 'var(--bg-secondary)',
+                border: godMode ? '1px solid var(--accent-primary)' : '1px solid var(--border-color)',
                 borderRadius: '8px',
-                boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.5)',
+                boxShadow: godMode
+                    ? '0 0 20px var(--accent-primary), 0 20px 25px -5px rgba(0, 0, 0, 0.5)'
+                    : '0 20px 25px -5px rgba(0, 0, 0, 0.5)',
                 display: 'flex',
                 flexDirection: 'column',
                 fontFamily: "'Fira Code', monospace",
@@ -159,18 +165,18 @@ const Terminal = ({ onClose, onAdmin, onMatrix }) => {
 
                 {/* Header */}
                 <div style={{
-                    backgroundColor: '#1e293b',
+                    backgroundColor: 'var(--bg-card)',
                     padding: '0.5rem 1rem',
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
-                    borderBottom: '1px solid #334155'
+                    borderBottom: '1px solid var(--border-color)'
                 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#94a3b8', fontSize: '0.9rem' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
                         <TerminalIcon size={16} />
-                        <span>visitor@percival:~</span>
+                        <span>{godMode ? 'god@percival:~' : 'visitor@percival:~'}</span>
                     </div>
-                    <button onClick={onClose} style={{ background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer' }}>
+                    <button onClick={onClose} style={{ background: 'none', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer' }}>
                         <X size={16} />
                     </button>
                 </div>
@@ -180,7 +186,7 @@ const Terminal = ({ onClose, onAdmin, onMatrix }) => {
                     flex: 1,
                     padding: '1rem',
                     overflowY: 'auto',
-                    color: '#e2e8f0',
+                    color: 'var(--text-primary)',
                     fontSize: '0.9rem'
                 }} onClick={() => inputRef.current?.focus()}>
                     {history.map((line, i) => (
@@ -195,7 +201,7 @@ const Terminal = ({ onClose, onAdmin, onMatrix }) => {
                     <div ref={messagesEndRef} />
 
                     <div style={{ display: 'flex', alignItems: 'center', marginTop: '0.5rem' }}>
-                        <span style={{ color: '#10b981', marginRight: '0.5rem' }}>visitor@percival:~$</span>
+                        <span style={{ color: godMode ? 'var(--accent-primary)' : '#10b981', marginRight: '0.5rem' }}>{prompt}</span>
                         <input
                             ref={inputRef}
                             type="text"
@@ -205,7 +211,7 @@ const Terminal = ({ onClose, onAdmin, onMatrix }) => {
                             style={{
                                 background: 'transparent',
                                 border: 'none',
-                                color: '#e2e8f0',
+                                color: 'var(--text-primary)',
                                 flex: 1,
                                 outline: 'none',
                                 fontFamily: 'inherit',
