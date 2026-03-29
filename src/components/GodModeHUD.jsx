@@ -59,12 +59,13 @@ const GodModeHUD = ({ onExit }) => {
                 particles[i].update();
                 particles[i].draw();
 
-                for (let j = i; j < particles.length; j++) {
+                for (let j = i + 1; j < particles.length; j++) {
                     const dx = particles[i].x - particles[j].x;
                     const dy = particles[i].y - particles[j].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    const distSq = dx * dx + dy * dy;
 
-                    if (distance < 150) {
+                    if (distSq < 22500) { // 150^2
+                        const distance = Math.sqrt(distSq);
                         ctx.strokeStyle = `rgba(217, 70, 239, ${1 - distance / 150})`; // Fuchsia line
                         ctx.beginPath();
                         ctx.moveTo(particles[i].x, particles[i].y);
