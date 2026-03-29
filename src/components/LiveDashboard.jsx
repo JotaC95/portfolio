@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Activity, Server, Wifi, Minimize2, Maximize2 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -7,8 +7,12 @@ const LiveDashboard = () => {
     const [temp, setTemp] = useState(42);
     const [nodes, setNodes] = useState(15);
     const [latency, setLatency] = useState(24);
-    const [history, setHistory] = useState(Array(20).fill(40));
     const [isMinimized, setIsMinimized] = useState(true);
+
+    // Performance optimization: Using a circular buffer with Int32Array to avoid array copies
+    const historyBuffer = useRef(new Int32Array(20).fill(40));
+    const head = useRef(0);
+    const [, forceUpdate] = useState({});
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -17,10 +21,12 @@ const LiveDashboard = () => {
             setTemp(newTemp);
             setLatency(Math.floor(20 + Math.random() * 10));
 
-            setHistory(prev => {
-                const newHistory = [...prev.slice(1), newTemp];
-                return newHistory;
-            });
+            // Update circular buffer
+            historyBuffer.current[head.current] = newTemp;
+            head.current = (head.current + 1) % 20;
+
+            // Trigger re-render to update the graph
+            forceUpdate({});
         }, 1000);
 
         return () => clearInterval(interval);
@@ -119,15 +125,22 @@ const LiveDashboard = () => {
 
             {/* Mini Svg Graph */}
             <div style={{ height: '40px', display: 'flex', alignItems: 'flex-end', gap: '2px', opacity: 0.8 }}>
-                {history.map((h, i) => (
-                    <div key={i} style={{
-                        flex: 1,
-                        backgroundColor: i === history.length - 1 ? 'var(--accent-primary)' : 'var(--text-secondary)',
-                        height: `${(h - 35) * 10}%`,
-                        borderRadius: '2px 2px 0 0',
-                        opacity: i / history.length
-                    }}></div>
-                ))}
+                {Array.from({ length: 20 }).map((_, i) => {
+                    // Calculate the index in the circular buffer (from oldest to newest)
+                    const index = (head.current + i) % 20;
+                    const h = historyBuffer.current[index];
+                    const isLast = i === 19;
+
+                    return (
+                        <div key={i} style={{
+                            flex: 1,
+                            backgroundColor: isLast ? 'var(--accent-primary)' : 'var(--text-secondary)',
+                            height: `${(h - 35) * 10}%`,
+                            borderRadius: '2px 2px 0 0',
+                            opacity: (i + 1) / 20
+                        }}></div>
+                    );
+                })}
             </div>
             <p style={{ marginTop: '0.5rem', fontSize: '0.65rem', color: 'var(--text-secondary)', textAlign: 'right' }}>
                 Latency: {latency}ms
