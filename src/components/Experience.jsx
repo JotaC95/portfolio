@@ -61,26 +61,7 @@ const Experience = () => {
                             </div>
 
                             {/* Content Card */}
-                            <div style={{
-                                flex: 1,
-                                backgroundColor: 'var(--bg-card)',
-                                padding: '1.5rem',
-                                borderRadius: '12px',
-                                border: '1px solid var(--border-color)',
-                                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-                                transition: 'transform 0.2s ease, box-shadow 0.2s ease'
-                            }}
-                                onMouseEnter={(e) => {
-                                    e.currentTarget.style.transform = 'translateY(-2px)';
-                                    e.currentTarget.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1)';
-                                    e.currentTarget.style.borderColor = 'var(--accent-primary)';
-                                }}
-                                onMouseLeave={(e) => {
-                                    e.currentTarget.style.transform = 'translateY(0)';
-                                    e.currentTarget.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)';
-                                    e.currentTarget.style.borderColor = 'var(--border-color)';
-                                }}
-                            >
+                            <div className="experience-card">
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.5rem' }}>
                                     <h3 style={{ fontSize: '1.25rem', color: 'var(--text-primary)', fontWeight: '600' }}>{item.title}</h3>
                                     <span style={{
