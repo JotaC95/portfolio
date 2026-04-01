@@ -21,7 +21,20 @@ const MatrixRain = ({ onClose }) => {
             drops[i] = 1;
         }
 
-        const draw = () => {
+        let frameId;
+        let lastTime = 0;
+        const fps = 30;
+        const intervalTime = 1000 / fps;
+
+        const draw = (currentTime) => {
+            frameId = requestAnimationFrame(draw);
+
+            // Throttle to ~30fps to maintain original visual speed
+            if (currentTime - lastTime < intervalTime) {
+                return;
+            }
+            lastTime = currentTime;
+
             // Semi-transparent black to create trail effect
             ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -41,7 +54,7 @@ const MatrixRain = ({ onClose }) => {
             }
         };
 
-        const interval = setInterval(draw, 33);
+        frameId = requestAnimationFrame(draw);
 
         const handleResize = () => {
             canvas.width = window.innerWidth;
@@ -50,7 +63,7 @@ const MatrixRain = ({ onClose }) => {
         window.addEventListener('resize', handleResize);
 
         return () => {
-            clearInterval(interval);
+            cancelAnimationFrame(frameId);
             window.removeEventListener('resize', handleResize);
         };
     }, []);
