@@ -5,14 +5,19 @@ import logo from '../assets/mintmango.png';
 
 const Navbar = ({ onLogoClick, onBlueprintClick }) => {
     const [isOpen, setIsOpen] = useState(false);
-    const [isDark, setIsDark] = useState(true);
+    const [isDark, setIsDark] = useState(() => {
+        const saved = localStorage.getItem('theme');
+        return saved ? saved === 'dark' : true;
+    });
     const { language, toggleLanguage, t } = useLanguage();
 
     useEffect(() => {
         if (isDark) {
             document.body.classList.remove('light-mode');
+            localStorage.setItem('theme', 'dark');
         } else {
             document.body.classList.add('light-mode');
+            localStorage.setItem('theme', 'light');
         }
     }, [isDark]);
 

@@ -1,11 +1,26 @@
-import React, { useState } from 'react';
-import { Mail, MessageSquare, Phone, Copy, Check, ExternalLink } from 'lucide-react';
+import React, { useState, useRef } from 'react';
+import emailjs from '@emailjs/browser';
+import { Mail, MessageSquare, Send, Copy, Check, Loader } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+
+// -------------------------------------------------------------------
+// EmailJS configuration
+// 1. Create a free account at https://www.emailjs.com
+// 2. Add an Email Service (Gmail, Outlook, etc.) → copy the Service ID
+// 3. Create an Email Template with variables:
+//      {{from_name}}, {{from_email}}, {{message}}
+//    → copy the Template ID
+// 4. Go to Account → Public Key → copy it
+// -------------------------------------------------------------------
+const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';
+const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
+const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';
 
 const Contact = () => {
     const { t } = useLanguage();
+    const formRef = useRef(null);
     const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-    const [status, setStatus] = useState('');
+    const [status, setStatus] = useState('idle'); // idle | sending | success | error
     const [copied, setCopied] = useState(false);
 
     const emailAddress = "jota.crow@gmail.com";
@@ -20,24 +35,52 @@ const Contact = () => {
         setTimeout(() => setCopied(false), 2000);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setStatus('sending');
 
-        // Robust Mailto Construction
-        const subject = encodeURIComponent(`Portfolio Contact from ${formData.name}`);
-        const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`);
+        // If EmailJS is not configured yet, fall back to mailto
+        if (
+            EMAILJS_SERVICE_ID === 'YOUR_SERVICE_ID' ||
+            EMAILJS_TEMPLATE_ID === 'YOUR_TEMPLATE_ID' ||
+            EMAILJS_PUBLIC_KEY === 'YOUR_PUBLIC_KEY'
+        ) {
+            const subject = encodeURIComponent(`Portfolio Contact from ${formData.name}`);
+            const body = encodeURIComponent(
+                `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+            );
+            window.location.href = `mailto:${emailAddress}?subject=${subject}&body=${body}`;
+            setStatus('idle');
+            return;
+        }
 
-        // Open default mail client
-        window.location.href = `mailto:${emailAddress}?subject=${subject}&body=${body}`;
-
-        // Give UI feedback
-        setTimeout(() => {
+        try {
+            await emailjs.sendForm(
+                EMAILJS_SERVICE_ID,
+                EMAILJS_TEMPLATE_ID,
+                formRef.current,
+                EMAILJS_PUBLIC_KEY
+            );
             setStatus('success');
             setFormData({ name: '', email: '', message: '' });
-            alert('Opening your email client to send the message...');
-            setStatus('');
-        }, 1000);
+            setTimeout(() => setStatus('idle'), 5000);
+        } catch (err) {
+            console.error('EmailJS error:', err);
+            setStatus('error');
+            setTimeout(() => setStatus('idle'), 5000);
+        }
+    };
+
+    const inputStyle = {
+        width: '100%',
+        padding: '1rem',
+        backgroundColor: 'var(--bg-primary)',
+        border: '1px solid var(--border-color)',
+        borderRadius: '8px',
+        color: 'var(--text-primary)',
+        outline: 'none',
+        fontSize: '1rem',
+        transition: 'border-color 0.2s ease',
     };
 
     return (
@@ -68,7 +111,9 @@ const Contact = () => {
                                 <div style={{ flex: 1 }}>
                                     <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>{t.contact.email}</p>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                                        <a href={`mailto:${emailAddress}`} style={{ fontSize: '1.1rem', fontWeight: 500, color: 'var(--text-primary)' }}>{emailAddress}</a>
+                                        <a href={`mailto:${emailAddress}`} style={{ fontSize: '1.1rem', fontWeight: 500, color: 'var(--text-primary)' }}>
+                                            {emailAddress}
+                                        </a>
                                         <button
                                             onClick={handleCopyEmail}
                                             title="Copy Email"
@@ -87,88 +132,88 @@ const Contact = () => {
                                     </div>
                                 </div>
                             </div>
-
-                            {/* Phone Removed */}
                         </div>
                     </div>
 
-                    {/* Functional Form */}
-                    <form onSubmit={handleSubmit} style={{
-                        backgroundColor: 'var(--bg-card)',
-                        padding: '2rem',
-                        borderRadius: '20px',
-                        border: '1px solid var(--border-color)'
-                    }}>
+                    {/* Form */}
+                    <form
+                        ref={formRef}
+                        onSubmit={handleSubmit}
+                        style={{
+                            backgroundColor: 'var(--bg-card)',
+                            padding: '2rem',
+                            borderRadius: '20px',
+                            border: '1px solid var(--border-color)'
+                        }}
+                    >
                         <div style={{ marginBottom: '1.5rem' }}>
-                            <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-secondary)' }}>{t.contact.formName}</label>
+                            <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-secondary)' }}>
+                                {t.contact.formName}
+                            </label>
                             <input
                                 type="text"
-                                name="name"
+                                name="from_name"
                                 required
                                 value={formData.name}
-                                onChange={handleChange}
+                                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                                 placeholder="John Doe"
-                                style={{
-                                    width: '100%',
-                                    padding: '1rem',
-                                    backgroundColor: 'var(--bg-primary)',
-                                    border: '1px solid var(--border-color)',
-                                    borderRadius: '8px',
-                                    color: 'var(--text-primary)',
-                                    outline: 'none'
-                                }}
+                                style={inputStyle}
                             />
                         </div>
 
                         <div style={{ marginBottom: '1.5rem' }}>
-                            <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-secondary)' }}>{t.contact.formEmail}</label>
+                            <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-secondary)' }}>
+                                {t.contact.formEmail}
+                            </label>
                             <input
                                 type="email"
-                                name="email"
+                                name="from_email"
                                 required
                                 value={formData.email}
-                                onChange={handleChange}
+                                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                                 placeholder="john@example.com"
-                                style={{
-                                    width: '100%',
-                                    padding: '1rem',
-                                    backgroundColor: 'var(--bg-primary)',
-                                    border: '1px solid var(--border-color)',
-                                    borderRadius: '8px',
-                                    color: 'var(--text-primary)',
-                                    outline: 'none'
-                                }}
+                                style={inputStyle}
                             />
                         </div>
 
                         <div style={{ marginBottom: '2rem' }}>
-                            <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-secondary)' }}>{t.contact.formMessage}</label>
+                            <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-secondary)' }}>
+                                {t.contact.formMessage}
+                            </label>
                             <textarea
                                 rows="4"
                                 name="message"
                                 required
                                 value={formData.message}
-                                onChange={handleChange}
+                                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                                 placeholder="How can I help you?"
-                                style={{
-                                    width: '100%',
-                                    padding: '1rem',
-                                    backgroundColor: 'var(--bg-primary)',
-                                    border: '1px solid var(--border-color)',
-                                    borderRadius: '8px',
-                                    color: 'var(--text-primary)',
-                                    outline: 'none',
-                                    resize: 'none'
-                                }}
-                            ></textarea>
+                                style={{ ...inputStyle, resize: 'none' }}
+                            />
                         </div>
 
-                        <button type="submit" disabled={status === 'sending'} className="btn btn-primary" style={{ width: '100%', justifyContent: 'center', opacity: status === 'sending' ? 0.7 : 1 }}>
-                            {status === 'sending' ? 'Opening Email Client...' : 'Send via Email App'} <ExternalLink size={20} style={{ marginLeft: '0.5rem' }} />
+                        <button
+                            type="submit"
+                            disabled={status === 'sending'}
+                            className="btn btn-primary"
+                            style={{ width: '100%', justifyContent: 'center', opacity: status === 'sending' ? 0.7 : 1 }}
+                        >
+                            {status === 'sending' ? (
+                                <><Loader size={18} style={{ marginRight: '0.5rem', animation: 'spin 1s linear infinite' }} /> Sending...</>
+                            ) : (
+                                <><Send size={18} style={{ marginRight: '0.5rem' }} /> {t.contact.formSend || 'Send Message'}</>
+                            )}
                         </button>
-                        <p style={{ marginTop: '1rem', fontSize: '0.8rem', color: 'var(--text-secondary)', textAlign: 'center' }}>
-                            *Uses your device's default email client
-                        </p>
+
+                        {status === 'success' && (
+                            <p style={{ marginTop: '1rem', color: '#10B981', textAlign: 'center', fontWeight: 500 }}>
+                                Message sent successfully! I'll get back to you soon.
+                            </p>
+                        )}
+                        {status === 'error' && (
+                            <p style={{ marginTop: '1rem', color: '#EF4444', textAlign: 'center', fontWeight: 500 }}>
+                                Something went wrong. Please email me directly at {emailAddress}.
+                            </p>
+                        )}
                     </form>
                 </div>
             </div>
