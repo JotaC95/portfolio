@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { ExternalLink, Github, Filter, ArrowRight, X } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -10,78 +10,78 @@ import estruccomImg from '../assets/estruccom.png';
 import corecareImg from '../assets/corecare.png';
 
 
+const projectsData = [
+    {
+        id: 1,
+        category: "Software", // Hotel App
+        image: hotelImg,
+        tech: ["React Native", "Expo", "Supabase", "TypeScript"],
+        link: "#",
+        github: "https://github.com/JotaC95/HotelProject"
+    },
+    {
+        id: 2,
+        category: "Data", // Pharmacy
+        image: pharmacyImg,
+        tech: ["React", "Node.js", "SQL", "Dashboard"],
+        link: "#",
+        github: "https://github.com/JotaC95/FarmaciaJose"
+    },
+    {
+        id: 3,
+        category: "Software", // Bakery
+        image: bakeryImg,
+        tech: ["React", "Tailwind", "UX/UI"],
+        link: "#",
+        github: "https://github.com/JotaC95/LaSerenaPage"
+    },
+    {
+        id: 4,
+        category: "Automation", // Structural Design
+        image: estruccomImg,
+        tech: ["React", "Portfolio", "Design"],
+        link: "#",
+        github: "https://github.com/JotaC95/estruccom-web"
+    },
+    {
+        id: 5,
+        category: "IoT", // Cattle Fence
+        image: cattleImg,
+        tech: ["AI", "Python", "Computer Vision", "GPS"],
+        link: "#",
+        github: "https://github.com/JotaC95/cattle_virtual_fence"
+    },
+    {
+        id: 6,
+        category: "HealthTech", // Corecare
+        image: corecareImg,
+        tech: ["React", "WebRTC", "Node.js", "HealthTech"],
+        link: "#",
+        github: "https://github.com/JotaC95/Corecare"
+    }
+];
+
 const Projects = () => {
     const { t } = useLanguage();
     const [filter, setFilter] = useState('all');
     const [selectedProject, setSelectedProject] = useState(null);
 
-    const categories = [
+    const categories = useMemo(() => [
         { id: 'all', label: t.projects.filters.all },
         { id: 'IoT', label: t.projects.filters.iot },
         { id: 'Automation', label: t.projects.filters.automation },
         { id: 'Software', label: t.projects.filters.software },
         { id: 'Data', label: t.projects.filters.data }
-    ];
+    ], [t.projects.filters]);
 
-    const projectsData = [
-        {
-            id: 1,
-            category: "Software", // Hotel App
-            image: hotelImg,
-            tech: ["React Native", "Expo", "Supabase", "TypeScript"],
-            link: "#",
-            github: "https://github.com/JotaC95/HotelProject"
-        },
-        {
-            id: 2,
-            category: "Data", // Pharmacy
-            image: pharmacyImg,
-            tech: ["React", "Node.js", "SQL", "Dashboard"],
-            link: "#",
-            github: "https://github.com/JotaC95/FarmaciaJose"
-        },
-        {
-            id: 3,
-            category: "Software", // Bakery
-            image: bakeryImg,
-            tech: ["React", "Tailwind", "UX/UI"],
-            link: "#",
-            github: "https://github.com/JotaC95/LaSerenaPage"
-        },
-        {
-            id: 4,
-            category: "Automation", // Structural Design
-            image: estruccomImg,
-            tech: ["React", "Portfolio", "Design"],
-            link: "#",
-            github: "https://github.com/JotaC95/estruccom-web"
-        },
-        {
-            id: 5,
-            category: "IoT", // Cattle Fence
-            image: cattleImg,
-            tech: ["AI", "Python", "Computer Vision", "GPS"],
-            link: "#",
-            github: "https://github.com/JotaC95/cattle_virtual_fence"
-        },
-        {
-            id: 6,
-            category: "HealthTech", // Corecare
-            image: corecareImg,
-            tech: ["React", "WebRTC", "Node.js", "HealthTech"],
-            link: "#",
-            github: "https://github.com/JotaC95/Corecare"
-        }
-    ];
-
-    const projects = projectsData.map((p, i) => ({
+    const projects = useMemo(() => projectsData.map((p, i) => ({
         ...p,
         ...t.projects.list[i] // This will need to match the order in LanguageContext
-    }));
+    })), [t.projects.list]);
 
-    const filteredProjects = filter === 'all'
+    const filteredProjects = useMemo(() => filter === 'all'
         ? projects
-        : projects.filter(p => p.category === filter);
+        : projects.filter(p => p.category === filter), [projects, filter]);
 
     return (
         <section id="projects" className="section" style={{ backgroundColor: 'var(--bg-secondary)' }}>
