@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { Activity, Play, RotateCcw, Award } from 'lucide-react';
-import { useLanguage } from '../context/LanguageContext';
+import { Play, RotateCcw, Award } from 'lucide-react';
 
 const OptimizationGame = () => {
-    const { t } = useLanguage();
     const canvasRef = useRef(null);
     const [isPlaying, setIsPlaying] = useState(false);
     const [won, setWon] = useState(false);
@@ -15,7 +13,7 @@ const OptimizationGame = () => {
 
     // Simulation State
     const [time, setTime] = useState(0);
-    const dataRef = useRef([]);
+    const dataRef = useRef({ array: null, head: 0, length: 0 });
     const frameRef = useRef();
 
     // System Model (Mass-Spring-Damper)
@@ -37,7 +35,7 @@ const OptimizationGame = () => {
         setIsPlaying(false);
         setWon(false);
         setTime(0);
-        dataRef.current = [];
+        dataRef.current = { array: null, head: 0, length: 0 };
         stateRef.current = { position: 0, velocity: 0, integral: 0, lastError: 0 };
         // Draw initial static state
         const ctx = canvasRef.current?.getContext('2d');
@@ -89,8 +87,16 @@ const OptimizationGame = () => {
         if (state.position < -20) state.position = -20;
 
         setTime(prev => prev + 1);
-        dataRef.current.push(state.position);
-        if (dataRef.current.length > width) dataRef.current.shift();
+
+        // Circular Buffer Update
+        if (!dataRef.current.array || dataRef.current.array.length !== width) {
+            dataRef.current.array = new Float32Array(width);
+        }
+        dataRef.current.array[dataRef.current.head] = state.position;
+        dataRef.current.head = (dataRef.current.head + 1) % width;
+        if (dataRef.current.length < width) {
+            dataRef.current.length++;
+        }
 
         // Draw Frame
         ctx.clearRect(0, 0, width, height);
@@ -100,27 +106,39 @@ const OptimizationGame = () => {
         ctx.beginPath();
         ctx.strokeStyle = '#38bdf8'; // Blue
         ctx.lineWidth = 2;
-        dataRef.current.forEach((val, i) => {
-            const x = width - (dataRef.current.length - i);
+
+        const { array, head, length: dataLength } = dataRef.current;
+        for (let i = 0; i < dataLength; i++) {
+            const logicalIndex = (head - dataLength + i + width) % width;
+            const val = array[logicalIndex];
+            const x = width - (dataLength - i);
             const y = height - (val / 100) * height;
             if (i === 0) ctx.moveTo(x, y);
             else ctx.lineTo(x, y);
-        });
+        }
         ctx.stroke();
 
         // Win Condition Check: Stable near 50 for 100 frames
         const stabilityLength = 100;
-        if (dataRef.current.length > stabilityLength) {
-            const lastSegment = dataRef.current.slice(-stabilityLength);
-            const isStable = lastSegment.every(v => Math.abs(v - setPoint) < 2);
+        if (dataLength > stabilityLength) {
+            let isStable = true;
+            for (let i = 0; i < stabilityLength; i++) {
+                // Check the last `stabilityLength` elements
+                const logicalIndex = (head - 1 - i + width) % width;
+                const v = array[logicalIndex];
+                if (Math.abs(v - setPoint) >= 2) {
+                    isStable = false;
+                    break;
+                }
+            }
             if (isStable) {
                 setWon(true);
                 setIsPlaying(false);
             }
         }
 
-        frameRef.current = requestAnimationFrame(runSimulation);
-    }, [isPlaying, kp, ki, kd, won]);
+        frameRef.current = requestAnimationFrame(() => runSimulation());
+    }, [isPlaying, kp, ki, kd, won, physics.damping, physics.mass, physics.spring]);
 
     useEffect(() => {
         if (isPlaying) {
@@ -142,6 +160,7 @@ const OptimizationGame = () => {
         }
         window.addEventListener('resize', resetGame);
         return () => window.removeEventListener('resize', resetGame);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
