@@ -109,6 +109,7 @@ function App() {
           onClose={() => setShowTerminal(false)}
           onAdmin={triggerHoneypot}
           onMatrix={() => setShowMatrix(true)}
+          godMode={godModeActive}
         />}
         {godModeActive && <GodModeHUD onExit={toggleGodMode} />}
 
