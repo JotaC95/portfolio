@@ -124,7 +124,7 @@ const Projects = () => {
                     gap: '2.5rem'
                 }}>
                     {filteredProjects.map((project, index) => (
-                        <div key={index} className="project-card fade-in" style={{
+                        <div key={index} className="project-card fade-in" data-aos="fade-up" data-aos-delay={index * 100} style={{
                             backgroundColor: 'var(--bg-primary)',
                             borderRadius: '16px',
                             overflow: 'hidden',

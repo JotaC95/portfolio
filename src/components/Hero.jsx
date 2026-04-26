@@ -41,7 +41,7 @@ const Hero = () => {
             }}></div>
 
             <div className="container" style={{ textAlign: 'center', position: 'relative', zIndex: 1 }}>
-                <h2 className="fade-in" style={{
+                <h2 className="fade-in" data-aos="zoom-in" style={{
                     color: 'var(--accent-primary)',
                     fontSize: '1.2rem',
                     fontWeight: 600,
@@ -57,7 +57,7 @@ const Hero = () => {
                     <DecryptedText text={t.hero.role} speed={50} />
                 </h2>
 
-                <h1 className="fade-in" style={{
+                <h1 className="fade-in" data-aos="fade-up" data-aos-delay="100" style={{
                     fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
                     fontWeight: 800,
                     marginBottom: '1.5rem',
@@ -75,7 +75,7 @@ const Hero = () => {
                     </span>
                 </h1>
 
-                <p className="fade-in" style={{
+                <p className="fade-in" data-aos="fade-up" data-aos-delay="200" style={{
                     fontSize: '1.2rem',
                     color: 'var(--text-secondary)',
                     maxWidth: '800px',
@@ -86,7 +86,7 @@ const Hero = () => {
                     {t.hero.description}
                 </p>
 
-                <div className="fade-in" style={{
+                <div className="fade-in" data-aos="fade-up" data-aos-delay="300" style={{
                     display: 'flex',
                     gap: '1.5rem',
                     justifyContent: 'center',
@@ -105,7 +105,7 @@ const Hero = () => {
                 </div>
 
                 {/* Social Icons for Hero */}
-                <div className="fade-in" style={{
+                <div className="fade-in" data-aos="fade-up" data-aos-delay="400" style={{
                     display: 'flex',
                     gap: '2rem',
                     justifyContent: 'center',

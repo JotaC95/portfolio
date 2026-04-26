@@ -7,26 +7,27 @@ import Experience from './components/Experience';
 import Skills from './components/Skills';
 import Projects from './components/Projects';
 import OptimizationDemo from './components/OptimizationDemo';
-import OptimizationGame from './components/OptimizationGame'; // Replaces OptimizationDemo
-import BlogSection from './components/BlogSection'; // New
+import OptimizationGame from './components/OptimizationGame';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import LiveDashboard from './components/LiveDashboard';
 import MatrixRain from './components/MatrixRain';
 import Terminal from './components/Terminal';
-import GodModeHUD from './components/GodModeHUD'; // New Import
-import SocialSidebar from './components/SocialSidebar'; // New Import
+import GodModeHUD from './components/GodModeHUD';
+import SocialSidebar from './components/SocialSidebar';
 import { LanguageProvider } from './context/LanguageContext';
 import useSound from './hooks/useSound';
+import { useAOS } from './hooks/useAOS';
 
 function App() {
   const [showMatrix, setShowMatrix] = useState(false);
   const [showTerminal, setShowTerminal] = useState(false);
   const [showSecurityAlert, setShowSecurityAlert] = useState(false);
-  const [godModeActive, setGodModeActive] = useState(false); // New State
+  const [godModeActive, setGodModeActive] = useState(false);
   const [konamiIndex, setKonamiIndex] = useState(0);
 
   const { playSound } = useSound();
+  useAOS();
 
   // Konami Code Sequence
   const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
@@ -171,7 +172,6 @@ function App() {
           <Skills />
           <OptimizationGame />
           <Projects />
-          <BlogSection />
           <Contact />
         </main>
         <Footer

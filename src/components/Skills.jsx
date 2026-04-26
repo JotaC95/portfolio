@@ -39,7 +39,7 @@ const Skills = () => {
                     gap: '2rem'
                 }}>
                     {skills.map((skill, index) => (
-                        <div key={index} className="skill-card" style={{
+                        <div key={index} className="skill-card" data-aos="fade-up" data-aos-delay={index * 100} style={{
                             backgroundColor: 'var(--bg-card)',
                             padding: '2rem',
                             borderRadius: '16px',

@@ -84,6 +84,8 @@ const Navbar = ({ onLogoClick, onBlueprintClick }) => {
                     {/* Theme Toggle */}
                     <button
                         onClick={toggleTheme}
+                        aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+                        title={isDark ? 'Light Mode' : 'Dark Mode'}
                         style={{
                             background: 'transparent',
                             border: '1px solid var(--border-color)',
@@ -93,8 +95,11 @@ const Navbar = ({ onLogoClick, onBlueprintClick }) => {
                             cursor: 'pointer',
                             display: 'flex',
                             alignItems: 'center',
-                            justifyContent: 'center'
+                            justifyContent: 'center',
+                            transition: 'all 0.3s ease'
                         }}
+                        onMouseEnter={(e) => e.target.style.borderColor = 'var(--accent-primary)'}
+                        onMouseLeave={(e) => e.target.style.borderColor = 'var(--border-color)'}
                     >
                         {isDark ? <Sun size={20} /> : <Moon size={20} />}
                     </button>
@@ -102,7 +107,8 @@ const Navbar = ({ onLogoClick, onBlueprintClick }) => {
                     {/* Blueprint Toggle */}
                     <button
                         onClick={onBlueprintClick}
-                        title="Blueprint Mode"
+                        aria-label="Toggle blueprint mode"
+                        title="Blueprint Mode - CAD Style Theme"
                         style={{
                             background: 'transparent',
                             border: '1px solid var(--border-color)',
@@ -112,8 +118,11 @@ const Navbar = ({ onLogoClick, onBlueprintClick }) => {
                             cursor: 'pointer',
                             display: 'flex',
                             alignItems: 'center',
-                            justifyContent: 'center'
+                            justifyContent: 'center',
+                            transition: 'all 0.3s ease'
                         }}
+                        onMouseEnter={(e) => e.target.style.borderColor = 'var(--accent-primary)'}
+                        onMouseLeave={(e) => e.target.style.borderColor = 'var(--border-color)'}
                     >
                         <Ruler size={20} />
                     </button>
@@ -121,6 +130,8 @@ const Navbar = ({ onLogoClick, onBlueprintClick }) => {
                     {/* Language Toggle */}
                     <button
                         onClick={toggleLanguage}
+                        aria-label={language === 'en' ? 'Switch to Spanish' : 'Switch to English'}
+                        title={language === 'en' ? 'Español' : 'English'}
                         style={{
                             background: 'transparent',
                             border: '1px solid var(--border-color)',
@@ -131,8 +142,11 @@ const Navbar = ({ onLogoClick, onBlueprintClick }) => {
                             display: 'flex',
                             alignItems: 'center',
                             gap: '0.5rem',
-                            fontWeight: 600
+                            fontWeight: 600,
+                            transition: 'all 0.3s ease'
                         }}
+                        onMouseEnter={(e) => e.target.style.borderColor = 'var(--accent-primary)'}
+                        onMouseLeave={(e) => e.target.style.borderColor = 'var(--border-color)'}
                     >
                         <Globe size={16} />
                         {language === 'en' ? 'ES' : 'EN'}
@@ -181,17 +195,29 @@ const Navbar = ({ onLogoClick, onBlueprintClick }) => {
 
                     <div style={{ display: 'flex', justifyContent: 'center', gap: '2rem', marginTop: '1rem', borderTop: '1px solid var(--border-color)', paddingTop: '1.5rem' }}>
                         {/* Theme Toggle Mobile */}
-                        <button onClick={toggleTheme} style={{ background: 'none', border: 'none', color: 'var(--text-primary)' }}>
+                        <button
+                            onClick={toggleTheme}
+                            aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+                            title={isDark ? 'Light Mode' : 'Dark Mode'}
+                            style={{ background: 'none', border: 'none', color: 'var(--text-primary)', cursor: 'pointer' }}>
                             {isDark ? <Sun size={24} /> : <Moon size={24} />}
                         </button>
 
                         {/* Blueprint Toggle Mobile */}
-                        <button onClick={onBlueprintClick} style={{ background: 'none', border: 'none', color: 'var(--text-primary)' }}>
+                        <button
+                            onClick={onBlueprintClick}
+                            aria-label="Toggle blueprint mode"
+                            title="Blueprint Mode"
+                            style={{ background: 'none', border: 'none', color: 'var(--text-primary)', cursor: 'pointer' }}>
                             <Ruler size={24} />
                         </button>
 
                         {/* Language Toggle Mobile */}
-                        <button onClick={toggleLanguage} style={{ background: 'none', border: 'none', color: 'var(--text-primary)', fontWeight: 'bold' }}>
+                        <button
+                            onClick={toggleLanguage}
+                            aria-label={language === 'en' ? 'Switch to Spanish' : 'Switch to English'}
+                            title={language === 'en' ? 'Español' : 'English'}
+                            style={{ background: 'none', border: 'none', color: 'var(--text-primary)', fontWeight: 'bold', cursor: 'pointer' }}>
                             <Globe size={24} />
                         </button>
                     </div>

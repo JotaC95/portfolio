@@ -7,11 +7,14 @@ const Contact = () => {
     const [formData, setFormData] = useState({ name: '', email: '', message: '' });
     const [status, setStatus] = useState('');
     const [copied, setCopied] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
     const emailAddress = "jota.crow@gmail.com";
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
+        setErrorMessage('');
     };
 
     const handleCopyEmail = () => {
@@ -20,24 +23,37 @@ const Contact = () => {
         setTimeout(() => setCopied(false), 2000);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setStatus('sending');
+        setErrorMessage('');
 
-        // Robust Mailto Construction
-        const subject = encodeURIComponent(`Portfolio Contact from ${formData.name}`);
-        const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`);
+        try {
+            const response = await fetch(`${API_URL}/api/contact`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
 
-        // Open default mail client
-        window.location.href = `mailto:${emailAddress}?subject=${subject}&body=${body}`;
+            const data = await response.json();
 
-        // Give UI feedback
-        setTimeout(() => {
+            if (!response.ok) {
+                throw new Error(data.error || 'Failed to send email');
+            }
+
             setStatus('success');
             setFormData({ name: '', email: '', message: '' });
-            alert('Opening your email client to send the message...');
-            setStatus('');
-        }, 1000);
+
+            setTimeout(() => {
+                setStatus('');
+            }, 3000);
+        } catch (error) {
+            console.error('Contact form error:', error);
+            setErrorMessage(error.message || 'Failed to send email. Please try again.');
+            setStatus('error');
+        }
     };
 
     return (
@@ -163,11 +179,39 @@ const Contact = () => {
                             ></textarea>
                         </div>
 
+                        {status === 'success' && (
+                            <div style={{
+                                backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                                border: '1px solid #10B981',
+                                color: '#10B981',
+                                padding: '1rem',
+                                borderRadius: '8px',
+                                marginBottom: '1rem',
+                                textAlign: 'center'
+                            }}>
+                                ✓ Message sent successfully! I'll get back to you soon.
+                            </div>
+                        )}
+
+                        {status === 'error' && (
+                            <div style={{
+                                backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                                border: '1px solid #ef4444',
+                                color: '#ef4444',
+                                padding: '1rem',
+                                borderRadius: '8px',
+                                marginBottom: '1rem',
+                                textAlign: 'center'
+                            }}>
+                                ✗ {errorMessage}
+                            </div>
+                        )}
+
                         <button type="submit" disabled={status === 'sending'} className="btn btn-primary" style={{ width: '100%', justifyContent: 'center', opacity: status === 'sending' ? 0.7 : 1 }}>
-                            {status === 'sending' ? 'Opening Email Client...' : 'Send via Email App'} <ExternalLink size={20} style={{ marginLeft: '0.5rem' }} />
+                            {status === 'sending' ? 'Sending...' : 'Send Message'} <ExternalLink size={20} style={{ marginLeft: '0.5rem' }} />
                         </button>
                         <p style={{ marginTop: '1rem', fontSize: '0.8rem', color: 'var(--text-secondary)', textAlign: 'center' }}>
-                            *Uses your device's default email client
+                            Or email me directly at <a href={`mailto:${emailAddress}`} style={{ color: 'var(--accent-primary)', textDecoration: 'underline' }}>{emailAddress}</a>
                         </p>
                     </form>
                 </div>
